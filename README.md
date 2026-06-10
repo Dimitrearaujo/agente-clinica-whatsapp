@@ -1,5 +1,7 @@
 # Agente Clinica WhatsApp
 
+![CI](https://github.com/Dimitrearaujo/agente-clinica-whatsapp/actions/workflows/ci.yml/badge.svg)
+
 Sistema de automacao WhatsApp para clinicas (veterinarias, odontologicas, esteticas) com 5 agentes IA operando 24/7.
 
 ## Agentes
