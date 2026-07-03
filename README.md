@@ -119,7 +119,7 @@ WhatsApp automation system for clinics (veterinary, dental, aesthetic) with 5 AI
 
 ## Architecture
 
-`
+```
 Evolution API (WhatsApp)
         |
         v
@@ -132,22 +132,33 @@ Evolution API (WhatsApp)
   llm.py (Claude Haiku)
         |
    database.py (SQLite)
-`
+```
 
 ## Installation
 
-`ash
+```bash
 git clone https://github.com/Dimitrearaujo/agente-clinica-whatsapp
 cd agente-clinica-whatsapp
 pip install -r requirements.txt
 
 cp .env.example .env
 # Edit .env with your keys
-`
+```
 
 **Prerequisites:**
 - Evolution API running with a connected WhatsApp instance
-- Anthropic API key (Claude Haiku — ~.01/1000 messages)
+- Anthropic API key (Claude Haiku — cost ~$0.01/1000 messages)
+
+## Usage
+
+```bash
+# Start server
+python server.py
+
+# Configure webhook on Evolution API:
+# POST http://localhost:8080/webhook/set/<instance>
+# URL: http://YOUR_IP:8800/webhook
+```
 
 ## Automated routines
 
@@ -160,4 +171,36 @@ The internal scheduler runs daily:
 | 18:00 | Google review request |
 | 20:00 | Daily report for the owner |
 
+Or manual trigger via API:
+
+```bash
+curl -X POST http://localhost:8800/rotinas/confirmacoes \
+  -H "X-Token: YOUR_TOKEN"
+```
+
+## Structure
+
+```
+agente-clinica-whatsapp/
+   agents/
+      recepcionista.py   # Conversational AI
+      confirmador.py     # D-1 reminders
+      resgate.py         # No-shows
+      avaliacao.py       # NPS + Google Review
+      painel.py          # Manager report
+   core/
+      llm.py             # Claude API wrapper
+      whatsapp.py        # Evolution API
+      database.py        # SQLite
+   server.py             # FastAPI + scheduler
+```
+
+## License
+
+MIT
+
 </details>
+
+---
+
+[← Back to profile](https://github.com/Dimitrearaujo)
